@@ -1,0 +1,18 @@
+version: '3.4'
+
+services:
+   C2:
+      build: .
+      volumes:
+         - C2_DATA:/app/c2.db
+      ports:
+         - "8080:8080"
+      deploy:
+         mode: global
+         placement:
+            constraints:
+               - node.platform.os == linux
+volumes:
+  C2_DATA:
+    driver: glusterfs
+    name: "gfs/C2_DATA"
